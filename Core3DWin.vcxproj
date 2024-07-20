@@ -70,19 +70,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Core3D\vendor\assimp\Compiler;$(SolutionDir)\Core3D\vendor\assimp;$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLFW\include\GLFW;$(SolutionDir)\Core3D\vendor\imgui\backends;$(SolutionDir)\Core3D\vendor\imgui;$(SolutionDir)\Core3D\vendor;$(SolutionDir)\Dependencies\glew\include\GL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLFW\include\GLFW;$(SolutionDir)\Core3D\vendor\imgui\backends;$(SolutionDir)\Core3D\vendor\imgui;$(SolutionDir)\Core3D\vendor;$(SolutionDir)\Dependencies\glew\include\GL</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\assimp\lib\x64;$(SolutionDir)Dependencies\glew\lib\Release\Win32;$(SolutionDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\glew\lib\Release\Win32</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLFW\include\GLFW;$(SolutionDir)\Core3D\vendor\imgui\backends;$(SolutionDir)\Core3D\vendor\imgui;$(SolutionDir)\Core3D\vendor;$(SolutionDir)\Dependencies\glew\include\GL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLFW\include\GLFW;$(SolutionDir)\Core3D\vendor\imgui\backends;$(SolutionDir)\Core3D\vendor\imgui;$(SolutionDir)\Core3D\vendor\assimp;$(SolutionDir)\Core3D\vendor;$(SolutionDir)\Dependencies\glew\include\GL;$(SolutionDir)\Core3D\vendor\stb</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\glew\lib\Release\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\glew\lib\Release\x64;$(SolutionDir)Dependencies\assimp</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,7 +144,10 @@
     <ClCompile Include="Core3D\src\IndexBuffer.cpp" />
     <ClCompile Include="Core3D\src\Input.cpp" />
     <ClCompile Include="Core3D\src\main.cpp" />
+    <ClCompile Include="Core3D\src\mesh.cpp" />
+    <ClCompile Include="Core3D\src\model.cpp" />
     <ClCompile Include="Core3D\src\Renderer.cpp" />
+    <ClCompile Include="Core3D\src\stb.cpp" />
     <ClCompile Include="Core3D\src\VertexArray.cpp" />
     <ClCompile Include="Core3D\src\VertexBuffer.cpp" />
     <ClCompile Include="Core3D\vendor\glm\detail\glm.cpp" />
@@ -160,10 +166,94 @@
     <ClInclude Include="Core3D\src\IndexBuffer.hpp" />
     <ClInclude Include="Core3D\src\Input.hpp" />
     <ClInclude Include="Core3D\src\level0.hpp" />
+    <ClInclude Include="Core3D\src\mesh.hpp" />
+    <ClInclude Include="Core3D\src\model.hpp" />
     <ClInclude Include="Core3D\src\Renderer.hpp" />
     <ClInclude Include="Core3D\src\ShaderCompiler.hpp" />
     <ClInclude Include="Core3D\src\VertexArray.hpp" />
     <ClInclude Include="Core3D\src\VertexBuffer.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\aabb.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ai_assert.h" />
+    <ClInclude Include="Core3D\vendor\assimp\anim.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Base64.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\BaseImporter.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Bitmap.h" />
+    <ClInclude Include="Core3D\vendor\assimp\BlobIOSystem.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ByteSwapper.h" />
+    <ClInclude Include="Core3D\vendor\assimp\camera.h" />
+    <ClInclude Include="Core3D\vendor\assimp\cexport.h" />
+    <ClInclude Include="Core3D\vendor\assimp\cfileio.h" />
+    <ClInclude Include="Core3D\vendor\assimp\cimport.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ColladaMetaData.h" />
+    <ClInclude Include="Core3D\vendor\assimp\color4.h" />
+    <ClInclude Include="Core3D\vendor\assimp\commonMetaData.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="Core3D\vendor\assimp\config.h" />
+    <ClInclude Include="Core3D\vendor\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="Core3D\vendor\assimp\DefaultIOStream.h" />
+    <ClInclude Include="Core3D\vendor\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="Core3D\vendor\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\defs.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Exceptional.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Exporter.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\fast_atof.h" />
+    <ClInclude Include="Core3D\vendor\assimp\GenericProperty.h" />
+    <ClInclude Include="Core3D\vendor\assimp\GltfMaterial.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Hash.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Importer.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\importerdesc.h" />
+    <ClInclude Include="Core3D\vendor\assimp\IOStream.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="Core3D\vendor\assimp\IOSystem.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\light.h" />
+    <ClInclude Include="Core3D\vendor\assimp\LineSplitter.h" />
+    <ClInclude Include="Core3D\vendor\assimp\LogAux.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Logger.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\LogStream.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\material.h" />
+    <ClInclude Include="Core3D\vendor\assimp\MathFunctions.h" />
+    <ClInclude Include="Core3D\vendor\assimp\matrix3x3.h" />
+    <ClInclude Include="Core3D\vendor\assimp\matrix4x4.h" />
+    <ClInclude Include="Core3D\vendor\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="Core3D\vendor\assimp\mesh.h" />
+    <ClInclude Include="Core3D\vendor\assimp\metadata.h" />
+    <ClInclude Include="Core3D\vendor\assimp\NullLogger.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\ObjMaterial.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ParsingUtils.h" />
+    <ClInclude Include="Core3D\vendor\assimp\pbrmaterial.h" />
+    <ClInclude Include="Core3D\vendor\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="Core3D\vendor\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="Core3D\vendor\assimp\postprocess.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Profiler.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="Core3D\vendor\assimp\qnan.h" />
+    <ClInclude Include="Core3D\vendor\assimp\quaternion.h" />
+    <ClInclude Include="Core3D\vendor\assimp\RemoveComments.h" />
+    <ClInclude Include="Core3D\vendor\assimp\scene.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SceneCombiner.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SGSpatialSort.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SmallVector.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SmoothingGroups.h" />
+    <ClInclude Include="Core3D\vendor\assimp\SpatialSort.h" />
+    <ClInclude Include="Core3D\vendor\assimp\StandardShapes.h" />
+    <ClInclude Include="Core3D\vendor\assimp\StreamReader.h" />
+    <ClInclude Include="Core3D\vendor\assimp\StreamWriter.h" />
+    <ClInclude Include="Core3D\vendor\assimp\StringComparison.h" />
+    <ClInclude Include="Core3D\vendor\assimp\StringUtils.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Subdivision.h" />
+    <ClInclude Include="Core3D\vendor\assimp\texture.h" />
+    <ClInclude Include="Core3D\vendor\assimp\TinyFormatter.h" />
+    <ClInclude Include="Core3D\vendor\assimp\types.h" />
+    <ClInclude Include="Core3D\vendor\assimp\vector2.h" />
+    <ClInclude Include="Core3D\vendor\assimp\vector3.h" />
+    <ClInclude Include="Core3D\vendor\assimp\version.h" />
+    <ClInclude Include="Core3D\vendor\assimp\Vertex.h" />
+    <ClInclude Include="Core3D\vendor\assimp\XmlParser.h" />
+    <ClInclude Include="Core3D\vendor\assimp\XMLTools.h" />
+    <ClInclude Include="Core3D\vendor\assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="Core3D\vendor\glm\common.hpp" />
     <ClInclude Include="Core3D\vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="Core3D\vendor\glm\detail\compute_vector_decl.hpp" />
@@ -472,20 +562,31 @@
     <ClInclude Include="Core3D\vendor\imgui\examples\libs\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="Core3D\vendor\imgui\examples\libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="Core3D\vendor\imgui\examples\libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Core3D\vendor\stb\stb_image.h" />
     <ClInclude Include="Dependencies\glew\include\GL\eglew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\glxew.h" />
     <ClInclude Include="Dependencies\glew\include\GL\wglew.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Core3D_backup\Core3D\glew32.dll" />
     <None Include="Core3D\.gitignore" />
+    <None Include="Core3D\assimp-vc143-mt.dll" />
     <None Include="Core3D\glew32.dll" />
     <None Include="Core3D\imgui.ini" />
     <None Include="Core3D\makefile" />
     <None Include="Core3D\notes.md" />
     <None Include="Core3D\README.md" />
     <None Include="Core3D\res\shaders\basic.shader" />
+    <None Include="Core3D\vendor\assimp\color4.inl" />
+    <None Include="Core3D\vendor\assimp\material.inl" />
+    <None Include="Core3D\vendor\assimp\matrix3x3.inl" />
+    <None Include="Core3D\vendor\assimp\matrix4x4.inl" />
+    <None Include="Core3D\vendor\assimp\quaternion.inl" />
+    <None Include="Core3D\vendor\assimp\SmoothingGroups.inl" />
+    <None Include="Core3D\vendor\assimp\vector2.inl" />
+    <None Include="Core3D\vendor\assimp\vector3.inl" />
     <None Include="Core3D\vendor\glm\detail\func_common.inl" />
     <None Include="Core3D\vendor\glm\detail\func_common_simd.inl" />
     <None Include="Core3D\vendor\glm\detail\func_exponential.inl" />
@@ -630,7 +731,7 @@
     <None Include="Dependencies\GLFW\lib-vc2022\glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Dependencies\glew\lib\Release\Win32\glew32.lib" />
+    <Library Include="Dependencies\assimp\assimp-vc143-mt.lib" />
     <Library Include="Dependencies\glew\lib\Release\Win32\glew32s.lib" />
     <Library Include="Dependencies\glew\lib\Release\x64\glew32.lib" />
     <Library Include="Dependencies\glew\lib\Release\x64\glew32s.lib" />

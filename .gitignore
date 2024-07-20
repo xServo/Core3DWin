@@ -1,5 +1,6 @@
+rend_test
+.DS_Store
 .vs/
 Core3DWin/
 Debug/
 x64/
-Debug/
